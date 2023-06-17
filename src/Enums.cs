@@ -4,7 +4,7 @@ namespace TicTacToe.Enums {
         O
     }
 
-    public enum GameMode {
+    public enum Mode {
         SinglePlayer,
         MultiPlayer
     }
@@ -13,5 +13,10 @@ namespace TicTacToe.Enums {
         Empty,
         X,
         O
+    }
+
+    struct Move {
+        public int X;
+        public int Y;
     }
 };
