@@ -18,5 +18,12 @@ namespace TicTacToe.Enums {
     struct Move {
         public int X;
         public int Y;
+
+        public Move(int x, int y) {
+            this.X = x;
+            this.Y = y;
+        }
+
+        public Move(){}
     }
 };
