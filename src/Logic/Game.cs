@@ -1,3 +1,4 @@
+using TicTacToe.Enums;
 using TicTacToe.Input;
 
 namespace TicTacToe.Logic
@@ -16,7 +17,7 @@ namespace TicTacToe.Logic
 
         public void Start()
         {
-            logic.RestartGame(UserInput.GetMode());
+            logic.StartGame(UserInput.GetMode());
             var isComputersTurn = false;
             while (!logic.IsGameOver())
             {
@@ -25,13 +26,19 @@ namespace TicTacToe.Logic
                 var move = logic.MakeMove(isComputersTurn);
                 if (move)
                 {
+                    var currentTile = logic.State.CurrentPlayer == Player.X ? Tile.X : Tile.O;
+                    if (ResultCalculator.IsGameOver(logic.State.Board, currentTile))
+                    {
+                        Console.WriteLine("Player " + currentTile + " wins!");
+                        break;
+                    }
+                    
                     logic.SwitchPlayer();
                     isComputersTurn = !isComputersTurn;
                 }
                 else
                 {
                     Console.WriteLine("Invalid move! Try Again.");
-                    continue;
                 }
             }
 
