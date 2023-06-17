@@ -12,7 +12,7 @@ namespace TicTacToe.Logic
             get { return _State; }
         }
 
-        public void RestartGame(Nullable<Mode> mode)
+        public void StartGame(Nullable<Mode> mode)
         {
             _State = new GameState();
             if (mode.HasValue)
@@ -28,9 +28,7 @@ namespace TicTacToe.Logic
 
         public Boolean IsGameOver()
         {
-            var gameOver = AreTilesFull(); ;
-
-            return gameOver;
+            return AreTilesFull() || ResultCalculator.IsGameOver(_State.Board, GetCurrentTile());
         }
 
 
@@ -69,7 +67,7 @@ namespace TicTacToe.Logic
             if (mode == Mode.SinglePlayer && isComputersTurn)
             {
                 var move = Recommendation.GetMove(_State);
-                if (!move.HasValue)
+                if (!move.HasValue || board[move.Value.X, move.Value.Y] != Tile.Empty)
                 {
                     return false;
                 }
@@ -78,7 +76,7 @@ namespace TicTacToe.Logic
             else
             {
                 var move = GetMove();
-                if (!move.HasValue)
+                if (!move.HasValue || board[move.Value.X, move.Value.Y] != Tile.Empty)
                 {
                     return false;
                 }
@@ -96,7 +94,7 @@ namespace TicTacToe.Logic
             return move;
         }
 
-         public Tile GetCurrentTile() {
+        public Tile GetCurrentTile() {
             return _State.CurrentPlayer == Player.X ? Tile.X : Tile.O;
         }
 
