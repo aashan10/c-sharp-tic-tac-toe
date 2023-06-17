@@ -1,2 +1,12 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿namespace TicTacToe
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var game = new Logic.Game();
+            game.Start();
+            
+        }
+    }
+}
